@@ -20,6 +20,9 @@ public class ShoppingListController {
     private Button addItem;
 
     @FXML
+    private Button removeItem;
+
+    @FXML
     private Label errorMessage;
 
     private Map<String, Integer> shoppingList;
@@ -27,6 +30,7 @@ public class ShoppingListController {
     @FXML
     public void initialize() {
         this.addItem.setOnAction(e -> this.addItemToList());
+        this.removeItem.setOnAction(e -> this.removeItemFromList());
         this.shoppingList = new HashMap<>();
     }
 
@@ -41,6 +45,21 @@ public class ShoppingListController {
             this.shoppingListView.getItems().add(itemName + " - Quantity: " + this.shoppingList.get(itemName));
             // Clear the text field
             this.itemName.clear();
+            // Clear error message
+            this.errorMessage.setText("");
+        }
+    }
+
+    public void removeItemFromList() {
+        String selectedItem = this.shoppingListView.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            // Display error message
+            this.errorMessage.setText("An item must be selected.");
+        } else {
+            // Remove item from the list
+            String itemName = selectedItem.split(" - Quantity: ")[0];
+            this.shoppingList.remove(itemName);
+            this.shoppingListView.getItems().remove(selectedItem);
             // Clear error message
             this.errorMessage.setText("");
         }

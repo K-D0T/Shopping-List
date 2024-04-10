@@ -22,7 +22,7 @@ public class ShoppingListControllerTest extends ApplicationTest {
         Parent root = loader.load();
         this.controller = loader.getController();
         stage.setScene(new Scene(root));
-        stage.show();
+        stage.show(); 
     }
 
     @Test
@@ -46,5 +46,25 @@ public class ShoppingListControllerTest extends ApplicationTest {
         assertEquals(1, this.controller.getShoppingListView().getItems().size());
         assertEquals("Milk - Quantity: 0", this.controller.getShoppingListView().getItems().get(0));
         assertEquals("", this.controller.getErrorMessage().getText());
+    }
+    @Test
+    public void testRemoveItemFromListWithItemSelected() {
+        // Add an item to the list first
+        clickOn("#itemName").write("Milk");
+        clickOn("#addItem");
+        // Select the item in the list
+        clickOn("Milk - Quantity: 0");
+        // Remove the item from the list
+        clickOn("#removeItem");
+        assertTrue(this.controller.getShoppingListView().getItems().isEmpty());
+        assertEquals("", this.controller.getErrorMessage().getText());
+    }
+    
+    @Test
+    public void testRemoveItemFromListWithoutItemSelected() {
+        // Try to remove an item from the list without selecting an item
+        clickOn("#removeItem");
+        assertTrue(this.controller.getShoppingListView().getItems().isEmpty());
+        assertEquals("An item must be selected.", this.controller.getErrorMessage().getText());
     }
 }
