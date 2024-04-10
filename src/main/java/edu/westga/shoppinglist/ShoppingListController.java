@@ -17,10 +17,16 @@ public class ShoppingListController {
     private TextField itemName;
 
     @FXML
+    private TextField itemQuantity;
+
+    @FXML
     private Button addItem;
 
     @FXML
     private Button removeItem;
+
+    @FXML
+    private Button updateQuantity;
 
     @FXML
     private Label errorMessage;
@@ -31,6 +37,7 @@ public class ShoppingListController {
     public void initialize() {
         this.addItem.setOnAction(e -> this.addItemToList());
         this.removeItem.setOnAction(e -> this.removeItemFromList());
+        this.updateQuantity.setOnAction(e -> this.updateItemQuantity());
         this.shoppingList = new HashMap<>();
     }
 
@@ -65,12 +72,42 @@ public class ShoppingListController {
         }
     }
 
+    public void updateItemQuantity() {
+        String selectedItem = this.shoppingListView.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            // Display error message
+            this.errorMessage.setText("An item must be selected.");
+        } else {
+            try {
+                int quantity = Integer.parseInt(this.itemQuantity.getText().trim());
+                if (quantity <= 0) {
+                    // Display error message
+                    this.errorMessage.setText("A positive quantity must be provided.");
+                } else {
+                    // Update item quantity in the list
+                    String itemName = selectedItem.split(" - Quantity: ")[0];
+                    this.shoppingList.put(itemName, quantity);
+                    this.shoppingListView.getItems().set(this.shoppingListView.getItems().indexOf(selectedItem), itemName + " - Quantity: " + quantity);
+                    // Clear error message
+                    this.errorMessage.setText("");
+                }
+            } catch (NumberFormatException e) {
+                // Display error message
+                this.errorMessage.setText("A positive quantity must be provided.");
+            }
+        }
+    }
+
     public ListView<String> getShoppingListView() {
         return this.shoppingListView;
     }
 
     public TextField getItemName() {
         return this.itemName;
+    }
+
+    public TextField getItemQuantity() {
+        return this.itemQuantity;
     }
 
     public Label getErrorMessage() {
