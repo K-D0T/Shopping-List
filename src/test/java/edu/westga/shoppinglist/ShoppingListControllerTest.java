@@ -18,9 +18,6 @@ public class ShoppingListControllerTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.setProperty("testfx.robot", "glass");
-        System.setProperty("prism.order", "sw");
-        System.setProperty("prism.text", "t2k");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainWindow.fxml"));
         Parent root = loader.load();
         this.controller = loader.getController();
