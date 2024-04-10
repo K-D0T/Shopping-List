@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ShoppingListController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">shopping-list</a> &gt; <a href="index.source.html" class="el_package">edu.westga.shoppinglist</a> &gt; <span class="el_source">ShoppingListController.java</span></div><h1>ShoppingListController.java</h1><pre class="source lang-java linenums">package edu.westga.shoppinglist;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
+import java.util.HashMap;
+import java.util.Map;
+
+<span class="fc" id="L12">public class ShoppingListController {</span>
+    @FXML
+    private ListView&lt;String&gt; shoppingListView;
+
+    @FXML
+    private TextField itemName;
+
+    @FXML
+    private Button addItem;
+
+    @FXML
+    private Label errorMessage;
+
+    private Map&lt;String, Integer&gt; shoppingList;
+
+    @FXML
+    public void initialize() {
+<span class="fc" id="L29">        this.addItem.setOnAction(e -&gt; this.addItemToList());</span>
+<span class="fc" id="L30">        this.shoppingList = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L31">    }</span>
+
+    public void addItemToList() {
+<span class="fc" id="L34">        String itemName = this.itemName.getText().trim();</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (itemName.isEmpty()) {</span>
+            // Display error message
+<span class="fc" id="L37">            this.errorMessage.setText(&quot;Item name must be provided.&quot;);</span>
+        } else {
+            // Add item to the list
+<span class="fc" id="L40">            this.shoppingList.putIfAbsent(itemName, 0);</span>
+<span class="fc" id="L41">            this.shoppingListView.getItems().add(itemName + &quot; - Quantity: &quot; + this.shoppingList.get(itemName));</span>
+            // Clear the text field
+<span class="fc" id="L43">            this.itemName.clear();</span>
+            // Clear error message
+<span class="fc" id="L45">            this.errorMessage.setText(&quot;&quot;);</span>
+        }
+<span class="fc" id="L47">    }</span>
+
+    public ListView&lt;String&gt; getShoppingListView() {
+<span class="fc" id="L50">        return this.shoppingListView;</span>
+    }
+
+    public TextField getItemName() {
+<span class="fc" id="L54">        return this.itemName;</span>
+    }
+
+    public Label getErrorMessage() {
+<span class="fc" id="L58">        return this.errorMessage;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
