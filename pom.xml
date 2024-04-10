@@ -61,9 +61,24 @@
           <version>0.8.7</version>
           <executions>
             <execution>
+              <id>check</id>
               <goals>
-                <goal>prepare-agent</goal>
+                <goal>check</goal>
               </goals>
+              <configuration>
+                <rules>
+                  <rule>
+                    <element>BUNDLE</element>
+                    <limits>
+                      <limit>
+                        <counter>LINE</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>0.90</minimum>
+                      </limit>
+                    </limits>
+                  </rule>
+                </rules>
+              </configuration>
             </execution>
             <execution>
               <id>report</id>

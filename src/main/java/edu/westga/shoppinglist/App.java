@@ -1,13 +1,15 @@
+/**
+ * This package contains the main application class.
+ */
 package edu.westga.shoppinglist;
 
 /**
- * Hello world!
+ * This class represents the main application.
  *
+ * @author Kaiden Thrailkill
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+public class App {
+    public static void main(final String[] args) {
+        System.out.println("Hello World!");
     }
 }
