@@ -19,10 +19,8 @@ public class ShoppingListControllerTest extends ApplicationTest {
     @Override
     public void start(Stage stage) throws Exception {
         System.setProperty("testfx.robot", "glass");
-        System.setProperty("testfx.headless", "true");
         System.setProperty("prism.order", "sw");
         System.setProperty("prism.text", "t2k");
-        System.setProperty("java.awt.headless", "true");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainWindow.fxml"));
         Parent root = loader.load();
         this.controller = loader.getController();
