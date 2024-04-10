@@ -19,6 +19,8 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Label fx:id="errorMessage" layoutX="34.0" layoutY="80.0" prefHeight="17.0" prefWidth="185.0" textFill="RED" />
+      <Label fx:id="errorMessage" layoutX="222.0" layoutY="80.0" prefHeight="17.0" prefWidth="223.0" textFill="RED" />
+      <TextField fx:id="itemQuantity" layoutX="34.0" layoutY="76.0" prefHeight="25.0" prefWidth="55.0" />
+      <Button fx:id="updateQuantity" layoutX="104.0" layoutY="76.0" mnemonicParsing="false" onAction="#updateItemQuantity" text="Update Quantity" />
    </children>
 </AnchorPane>

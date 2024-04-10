@@ -67,4 +67,43 @@ public class ShoppingListControllerTest extends ApplicationTest {
         assertTrue(this.controller.getShoppingListView().getItems().isEmpty());
         assertEquals("An item must be selected.", this.controller.getErrorMessage().getText());
     }
+
+    @Test
+    public void testUpdateItemQuantityWithItemSelected() {
+        // Add an item to the list first
+        clickOn("#itemName").write("Milk");
+        clickOn("#addItem");
+        // Select the item in the list
+        clickOn("Milk - Quantity: 0");
+        // Update the quantity of the item
+        clickOn("#itemQuantity").write("2");
+        clickOn("#updateQuantity");
+        assertEquals(1, this.controller.getShoppingListView().getItems().size());
+        assertEquals("Milk - Quantity: 2", this.controller.getShoppingListView().getItems().get(0));
+        assertEquals("", this.controller.getErrorMessage().getText());
+    }
+    
+    @Test
+    public void testUpdateItemQuantityWithoutItemSelected() {
+        // Try to update the quantity of an item without selecting an item
+        clickOn("#itemQuantity").write("2");
+        clickOn("#updateQuantity");
+        assertTrue(this.controller.getShoppingListView().getItems().isEmpty());
+        assertEquals("An item must be selected.", this.controller.getErrorMessage().getText());
+    }
+    
+    @Test
+    public void testUpdateItemQuantityWithInvalidQuantity() {
+        // Add an item to the list first
+        clickOn("#itemName").write("Milk");
+        clickOn("#addItem");
+        // Select the item in the list
+        clickOn("Milk - Quantity: 0");
+        // Try to update the quantity of the item with an invalid quantity
+        clickOn("#itemQuantity").write("0");
+        clickOn("#updateQuantity");
+        assertEquals(1, this.controller.getShoppingListView().getItems().size());
+        assertEquals("Milk - Quantity: 0", this.controller.getShoppingListView().getItems().get(0));
+        assertEquals("A positive quantity must be provided.", this.controller.getErrorMessage().getText());
+    }
 }
