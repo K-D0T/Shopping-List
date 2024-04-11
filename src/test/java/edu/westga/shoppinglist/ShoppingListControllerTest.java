@@ -11,10 +11,12 @@ import javafx.scene.control.TextField;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.testfx.util.WaitForAsyncUtils;
 
 
 public class ShoppingListControllerTest extends ApplicationTest {
     private ShoppingListController controller;
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -25,14 +27,17 @@ public class ShoppingListControllerTest extends ApplicationTest {
         stage.show(); 
     }
 
+    
     @Test
     public void testGetItemName() {
+        WaitForAsyncUtils.waitForFxEvents();
         TextField itemNameField = this.controller.getItemName();
         assertNotNull(itemNameField, "Item name field should not be null");
     }
 
     @Test
     public void testAddItemToListWithEmptyName() {
+        WaitForAsyncUtils.waitForFxEvents();
         clickOn("#itemName").write("");
         clickOn("#addItem");
         assertTrue(this.controller.getShoppingListView().getItems().isEmpty());
@@ -41,6 +46,7 @@ public class ShoppingListControllerTest extends ApplicationTest {
 
     @Test
     public void testAddItemToListWithNonEmptyName() {
+        WaitForAsyncUtils.waitForFxEvents();
         clickOn("#itemName").write("Milk");
         clickOn("#addItem");
         assertEquals(1, this.controller.getShoppingListView().getItems().size());
@@ -49,6 +55,7 @@ public class ShoppingListControllerTest extends ApplicationTest {
     }
     @Test
     public void testRemoveItemFromListWithItemSelected() {
+        WaitForAsyncUtils.waitForFxEvents();
         // Add an item to the list first
         clickOn("#itemName").write("Milk");
         clickOn("#addItem");
@@ -62,6 +69,7 @@ public class ShoppingListControllerTest extends ApplicationTest {
     
     @Test
     public void testRemoveItemFromListWithoutItemSelected() {
+        WaitForAsyncUtils.waitForFxEvents();
         // Try to remove an item from the list without selecting an item
         clickOn("#removeItem");
         assertTrue(this.controller.getShoppingListView().getItems().isEmpty());
@@ -70,6 +78,7 @@ public class ShoppingListControllerTest extends ApplicationTest {
 
     @Test
     public void testUpdateItemQuantityWithItemSelected() {
+        WaitForAsyncUtils.waitForFxEvents();
         // Add an item to the list first
         clickOn("#itemName").write("Milk");
         clickOn("#addItem");
@@ -85,6 +94,7 @@ public class ShoppingListControllerTest extends ApplicationTest {
     
     @Test
     public void testUpdateItemQuantityWithoutItemSelected() {
+        WaitForAsyncUtils.waitForFxEvents();
         // Try to update the quantity of an item without selecting an item
         clickOn("#itemQuantity").write("2");
         clickOn("#updateQuantity");
@@ -94,13 +104,14 @@ public class ShoppingListControllerTest extends ApplicationTest {
     
     @Test
     public void testUpdateItemQuantityWithInvalidQuantity() {
+        WaitForAsyncUtils.waitForFxEvents();
         // Add an item to the list first
         clickOn("#itemName").write("Milk");
         clickOn("#addItem");
         // Select the item in the list
         clickOn("Milk - Quantity: 0");
         // Try to update the quantity of the item with an invalid quantity
-        clickOn("#itemQuantity").write("0");
+        clickOn("#itemQuantity").write("-1");
         clickOn("#updateQuantity");
         assertEquals(1, this.controller.getShoppingListView().getItems().size());
         assertEquals("Milk - Quantity: 0", this.controller.getShoppingListView().getItems().get(0));
