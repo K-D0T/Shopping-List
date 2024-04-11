@@ -14,9 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.testfx.util.WaitForAsyncUtils;
 
 
+
+
 public class ShoppingListControllerTest extends ApplicationTest {
     private ShoppingListController controller;
-
 
     @Override
     public void start(Stage stage) throws Exception {

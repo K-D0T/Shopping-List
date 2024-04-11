@@ -60,6 +60,13 @@
           <artifactId>maven-checkstyle-plugin</artifactId>
           <version>3.1.1</version>
           <configuration>
+              <systemPropertyVariables>
+                <testfx.robot>glass</testfx.robot>
+                <testfx.headless>true</testfx.headless>
+                <prism.order>sw</prism.order>
+                <prism.text>t2k</prism.text>
+                <java.awt.headless>true</java.awt.headless>
+              </systemPropertyVariables>
             <sourceDirectories>
               <sourceDirectory>src/main/java</sourceDirectory>
             </sourceDirectories>
