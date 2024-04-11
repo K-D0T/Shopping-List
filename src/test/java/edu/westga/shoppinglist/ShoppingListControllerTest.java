@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.testfx.util.WaitForAsyncUtils;
+import javafx.application.Platform;
 
 
 
@@ -19,15 +20,22 @@ import org.testfx.util.WaitForAsyncUtils;
 public class ShoppingListControllerTest extends ApplicationTest {
     private ShoppingListController controller;
 
+
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainWindow.fxml"));
-        Parent root = loader.load();
-        this.controller = loader.getController();
-        stage.setScene(new Scene(root));
-        stage.show(); 
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainWindow.fxml"));
+                Parent root = loader.load();
+                this.controller = loader.getController();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        WaitForAsyncUtils.waitForFxEvents();
     }
-
     
     @Test
     public void testGetItemName() {
