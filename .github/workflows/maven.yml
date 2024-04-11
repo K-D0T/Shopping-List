@@ -22,4 +22,4 @@ jobs:
     - name: Verify with Maven
       run: |
         echo TESTING Shopping-List Project
-        mvn clean verify
+        mvn clean verify -X
