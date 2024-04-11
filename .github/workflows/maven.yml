@@ -7,7 +7,8 @@ on:
     branches: [ 'master' ]
 
 jobs:
-  build:
+  verify:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +19,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Install XVFB
-      run: sudo apt-get update && sudo apt-get install -y xvfb
-    - name: Build with Maven using XVFB
-      run: xvfb-run mvn -B package --file pom.xml
+    - name: Verify with Maven
+      run: |
+        echo TESTING Shopping-List Project
+        mvn clean verify
