@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import javafx.scene.control.TextField;
 import javafx.embed.swing.JFXPanel;
@@ -13,13 +12,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.testfx.util.WaitForAsyncUtils;
+import org.junit.jupiter.api.BeforeAll;
 
 public class ShoppingListControllerTest extends ApplicationTest {
     private ShoppingListController controller;
 
     @BeforeAll
-    public static void setupJFX() {
-        final JFXPanel fxPanel = new JFXPanel();
+    public static void setupClass() throws Exception {
+        // This step will initialize the JavaFX toolkit
+        JFXPanel jfxPanel = new JFXPanel();
     }
 
 

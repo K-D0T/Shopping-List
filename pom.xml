@@ -8,9 +8,9 @@
     <name>shopping-list</name>
     <url>http://maven.apache.org</url>
     <properties>
+      <maven.compiler.source>21</maven.compiler.source>
+      <maven.compiler.target>21</maven.compiler.target>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <maven.compiler.source>11</maven.compiler.source>
-      <maven.compiler.target>11</maven.compiler.target>
     </properties>
     
     <dependencies>
@@ -18,17 +18,17 @@
       <dependency>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-controls</artifactId>
-        <version>13</version>
+        <version>21</version>
       </dependency>
       <dependency>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-fxml</artifactId>
-          <version>13</version>
+          <version>21</version>
       </dependency>
       <dependency>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-swing</artifactId>
-          <version>13</version>
+          <version>21</version>
       </dependency>
       <!-- JUnit 5 -->
       <dependency>
@@ -61,14 +61,12 @@
     <build>
       <plugins>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.1.1</version>
-          <configuration>
-            <sourceDirectories>
-              <sourceDirectory>src/main/java</sourceDirectory>
-            </sourceDirectories>
-          </configuration>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.10.1</version>
+            <configuration>
+                <release>21</release>
+            </configuration>
         </plugin>
         <plugin>
             <groupId>org.openjfx</groupId>
@@ -81,7 +79,7 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.7</version>
+          <version>0.8.12</version>
           <executions>
             <execution>
               <id>prepare-agent</id>
